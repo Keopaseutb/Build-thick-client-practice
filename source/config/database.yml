@@ -1,0 +1,12 @@
+development:
+  database: swakett_dev
+  adapter: postgresql
+
+test:
+  database: swakett_test
+  adapter: postgresql
+
+
+production:
+  database: swakett
+  adapter: postgresql
