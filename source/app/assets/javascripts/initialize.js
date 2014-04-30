@@ -1,12 +1,17 @@
 $(document).ready(function(){
-  console.log("document is ready");
+
+  var viewOpts = {
+    source: "#some-template",
+    addContent: ".container"
+  };
 
   var questionContOpts = {
-    view: new questionView(),
+    view: new questionView(viewOpts),
     getQuestionsFromDB: new Client('get', '/quizzes.json')
-  }
-  var questionListController = new questionController(questionContOpts)
+  };
 
-  questionListController.runApp()
+  var questionListController = new questionController(questionContOpts);
+
+  questionListController.runApp();
 
 });

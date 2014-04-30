@@ -1,13 +1,17 @@
-function questionView() {
+function questionView(viewOpts) {
+  this.source = viewOpts['source'];
+  this.addContent = viewOpts['addContent'];
 
 }
 
 questionView.prototype = {
   draw: function(data){
-    console.log(data.quizzes[0].name)
-    // debugger
-    var source = $("#some-template").html();
-    var template = Handlebars.compile(source);
-    $('.container').html(template(data))
-  }
+    var template = Handlebars.compile(this.getSource());
+    $(this.addContent).html(template(data));
+  },
+
+  getSource: function(){
+    return $(this.source).html();
+  },
+
 }
