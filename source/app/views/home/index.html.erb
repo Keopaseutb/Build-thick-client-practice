@@ -1,3 +1,21 @@
 <div class="container">
-  NOTHING TO SEE HERE!
+  <button id="showQuiz">Next Quiz</button>
+  <div class="quiz-container"></div>
+
+  <script id="quiz-template" type="text/x-handlebars-template">
+    <table>
+      <thead>
+        <th>Quiz ID</th>
+        <th>Name</th>
+      </thead>
+      <tbody>
+        {{#quizzes}}
+          <tr>
+            <td><a id="quiz{{quiz_id}}" href='#'>{{quiz_id}}</a></td>
+            <td>{{name}}</td>
+          </tr>
+        {{/quizzes}}
+      </tbody>
+    </table>
+  </script>
 </div>
