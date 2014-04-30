@@ -1,3 +1,22 @@
 <div class="container">
-  NOTHING TO SEE HERE!
+
+  <script id="quiz-template" type="text/x-handlebars-template">
+    hello
+    <div>{{quizzes}}</div>
+  </script>
+
+  <script id="question-template" type="text/x-handlebars-template">
+     {{#question}}
+      <h4 data-id="{{question_id}}">{{question_id}}. {{question}}</h4>
+      <section class="choices">
+        <ul>
+          {{#choices}}
+        <li data-id="{{choice_id}}"><a href="/">{{choice}}</a></li>
+          {{/choices}}
+        </ul>
+       {{/question}}
+      </section>
+  </script>
+
 </div>
+
