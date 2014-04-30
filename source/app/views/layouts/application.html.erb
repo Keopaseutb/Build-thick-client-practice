@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+	<!-- I created a template to store the quizzes in  -->
+	<ul id="quizz" >
+		<li>
+			{{quiz_id}}
+			<p>{{name}}</p>
+		</li>
+	</ul>
 <%= yield %>
 
 </body>

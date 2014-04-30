@@ -43,4 +43,12 @@ ActiveRecord::Schema.define(:version => 20131017022410) do
     t.integer  "num_incorrect"
   end
 
+  create_table "todos", :force => true do |t|
+    t.string  "title"
+    t.string  "body"
+    t.string  "list_name",  :default => ""
+    t.integer "status",     :default => 0
+    t.integer "todo_count"
+  end
+
 end
