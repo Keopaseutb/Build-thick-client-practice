@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   respond_to :json
+
   # GET /quizzes/:quiz_id/questions/next.json
   def next
     quiz = Quiz.find(params[:quiz_id])
