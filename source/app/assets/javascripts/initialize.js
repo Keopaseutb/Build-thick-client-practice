@@ -8,11 +8,14 @@ $(document).ready(function(){
   var quizView = new QuizListView(quizElements)
   var quizController = new QuizzesController(quiz, quizView)
 
-  // quizController.summonQuizzes()
-  // var controllers = {
-  //   quizController: quizController
-  // }
+  var controllers = {
+    quizController: quizController
+  }
+  var applicationController = new ApplicationController(controllers)
+  applicationController.bindListeners()
 
-  // var applicationController = new ApplicationController(controllers)
-  // applicationController.bindListeners()
+
+  quizController.summonQuizzes()
+
+
 })

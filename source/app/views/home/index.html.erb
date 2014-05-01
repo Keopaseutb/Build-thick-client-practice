@@ -1,8 +1,10 @@
 <div class="container">
-
   <script id="quiz-template" type="text/x-handlebars-template">
-    hello
-    <div>{{quizzes}}</div>
+    <ul>
+      {{#quizzes}}
+      <li class="quiz" data-quizid={{quiz_id}}>{{name}}</li>
+      {{/quizzes}}
+    </ul>
   </script>
 
   <script id="question-template" type="text/x-handlebars-template">

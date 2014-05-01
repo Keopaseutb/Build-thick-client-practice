@@ -3,14 +3,23 @@ function QuizList(url){
 }
 
 QuizList.prototype = {
-  fetch: function() {
+  fetchQuiz: function() {
     $.ajax({url: this.url, type: 'GET'})
     .done(function(json){
-      console.log("inside the model", json)
-      return json
-
-
+      new CustomEvent('quizList')
+      $.event.trigger('quizList', json)
     })
-
+  },
+  sendQuizId: function(quizId) {
+    $.ajax({
+      url: "/quizzes/"+quizId+"/questions/next.json",
+      type: 'GET',
+      data: {session_key: "dfakj9987afsjkladsf9"}
+    })
+    .done(function(json){
+    new CustomEvent('questionList')
+    console.log(json)
+    $.event.trigger('questionList', json)
+    })
   }
 }

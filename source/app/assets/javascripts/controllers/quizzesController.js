@@ -4,10 +4,18 @@ function QuizzesController(model, view){
 }
 
 QuizzesController.prototype = {
+  bindQuizListeners: function(){
+    var quiz = this.model
+    var quizView = this.view
+
+    $(document).on("quizList", quizView.drawQuizzes.bind(quizView))
+    $('body').on("click", ".quiz", this.askForQuestions.bind(this))
+  },
   summonQuizzes: function(){
-    this.view.drawQuizzes(this.model.fetch())
-    console.log(this.model.fetch())
-    console.log("in the controller", this.model.fetch())
-     console.log(this.model.fetch())
+    this.model.fetchQuiz()
+  },
+  askForQuestions: function(e){
+    var id = $(e.target).data('quizid')
+    this.model.sendQuizId(id)
   }
 }

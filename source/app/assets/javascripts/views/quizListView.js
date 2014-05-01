@@ -4,8 +4,7 @@ function QuizListView(quizElements){
 }
 
 QuizListView.prototype = {
-  drawQuizzes: function(json){
-    console.log(json)
+  drawQuizzes: function(e,json){
     var source = $(this.quizTemplate).html()
     var template = Handlebars.compile(source)
     $(this.container).html(template(json))
