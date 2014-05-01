@@ -11,11 +11,13 @@ ApplicationController = function(){
   var quizShower = new QuizShower()
   var question = new QuizQuestionGetter()
   quiz.fetch()
+  var question = new QuizQuestionGetter(1)
+  var questionShower = new QuestionShower()
+  // var choices = new ChoiceShower()
+
   $(quiz).on('quizUpdated', function (e,data) {
     quizShower.draw(data)
   })
-  var question = new QuizQuestionGetter(1)
-  var questionShower = new QuestionShower()
 
   question.fetch(function(questiondata) {
     questionShower.draw(questiondata.question)
@@ -54,7 +56,6 @@ QuizQuestionGetter.prototype = {
     action: "GET",
     data: {session_key : "ajerjijaf"}
   }).done(function(returnData){
-    debugger
     callback(returnData)
   }).fail(function(){
     console.log("Error")
@@ -74,7 +75,6 @@ QuestionShower = function() {
 QuestionShower.prototype = {
   draw: function (question_data) {
      $('.container').append(this.template(question_data))
-
   }
 }
 

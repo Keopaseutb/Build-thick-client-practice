@@ -5,6 +5,11 @@
 <script id="question-template" type="text/x-handlebars-template">
   <div class="question">
     <h1>{{question}}</h1>
+      <ul>
+      {{#choices}}
+        <li>{{choice}}</li>
+      {{/choices}}
+    </ul>
   </div>
 </script>
 
