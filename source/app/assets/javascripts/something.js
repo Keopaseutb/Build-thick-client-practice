@@ -9,9 +9,16 @@ $(document).ready(function(){
 ApplicationController = function(){
   var quiz = new QuizListGetter()
   var quizShower = new QuizShower()
+  var question = new QuizQuestionGetter()
   quiz.fetch()
   $(quiz).on('quizUpdated', function (e,data) {
     quizShower.draw(data)
+  })
+  var question = new QuizQuestionGetter(1)
+  var questionShower = new QuestionShower()
+
+  question.fetch(function(questiondata) {
+    questionShower.draw(questiondata.question)
   })
 }
 
@@ -21,7 +28,7 @@ QuizListGetter =function(geturl) {
 
 QuizListGetter.prototype = {
   fetch: function () {
-     var self = this
+  var self = this
   $.ajax({
     url: this.quizUrl,  //*When you register this event listener remember to bind
     action: "GET",
@@ -39,14 +46,16 @@ QuizQuestionGetter =function(quiz_number) {
 }
 
 QuizQuestionGetter.prototype = {
-  fetch: function () {
+
+  fetch: function (callback) {
+  var self = this;
   $.ajax({
     url: this.questionUrl,  //*When you register this event listener remember to bind
     action: "GET",
     data: {session_key : "ajerjijaf"}
   }).done(function(returnData){
     debugger
-      questionShower.draw(returnData.question)
+    callback(returnData)
   }).fail(function(){
     console.log("Error")
   })
@@ -57,7 +66,7 @@ QuizQuestionGetter.prototype = {
 /********************************************/
 
 QuestionShower = function() {
-  this.source = $('#entry-template').html();
+  this.source = $('#question-template').html();
   this.template = Handlebars.compile(this.source)
   // this.data = question_data
 }
