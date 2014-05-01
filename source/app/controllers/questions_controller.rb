@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   # GET /quizzes/:quiz_id/questions/next.json
   def next
     quiz = Quiz.find(params[:quiz_id])
+
     if quiz
       last_answered_question_id = @simple_session.last_answered_question_id || 0
       remaining_questions = quiz.questions.where("id > ?", last_answered_question_id)

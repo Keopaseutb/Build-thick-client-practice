@@ -4,38 +4,44 @@ Initialize = function(){
   model = new Model()
   controller = new Controller(view, model)
   controller.printQuizzes()
-  $('body').on('click',a,)
-}
 
+}
 
 
 ////////////////////////////////////////
 View = function(){
+
+
 }
 
 View.prototype = {
   printOutQuizzes: function(data) {
     var source = $("#entry-template").html();
     var template = Handlebars.compile(source);
-    var context = data
+    $('#quizzes_list').html(template(data))
 
-    $('#quizzes_list').html(template(context))
-    // var html = template(context);
-    // $('.content-placeholder').html(template({quizzes: [
-    //   {quiz_id: "1", name: "Fake Quiz 1"}]}));
+  },
+  printOutQuestion: function(data) {
+    console.log(data)
   },
 
-  displayQuestions: function(Quizzes){
-    console.log(Quizzes)
+  displayQuestions: function(){
+    event.preventDefault();
+    event.stopPropagation();
+    key = {session_key: 'a1323jklkjkldfasj2'};
+    $.get('/quizzes/1/questions/next.json',key,function(data){
+
+      this.printOutQuestion(data.question.question)
+    })
   }
 }
+
 ///////////////////////////////////////////
 Controller = function(view,model){
   this.view = view
   this.model = model
-
+  this.bindEventListeners();
 }
-
 
 Controller.prototype = {
   printQuizzes: function() {
@@ -44,6 +50,10 @@ Controller.prototype = {
       self.view.printOutQuizzes(data)
     })
   },
+
+  bindEventListeners: function() {
+    $('body').on('click', 'a', this.view.displayQuestions);
+  }
 }
 
 
@@ -63,4 +73,4 @@ Model.prototype = {
 
 $(document).ready(function(){
   var initialize = new Initialize()
-})
+});

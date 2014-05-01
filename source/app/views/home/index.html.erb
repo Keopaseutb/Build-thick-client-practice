@@ -1,13 +1,14 @@
 <!-- <div class="container"> -->
   <script id="entry-template" type="text/x-handlebars-template">
-  <div class="entry">
-     {{#quizzes}}
-      {{quiz_id}}:
-      <%= link_to '{{name}}', "quizzes/{{quiz_id}}/questions/next", :action => "GET", :html => {:class => 'quiz_link'}, :remote => true %>
-      <br>
-     {{/quizzes}}
-  </div>
+    <div class="entry">
+       {{#quizzes}}
+        {{quiz_id}}:
+        <%= link_to '{{name}}', "/quizzes/{{quiz_id}}/questions/next.json", method: :get, :class => 'quiz_link' %>
+        <br>
+       {{/quizzes}}
+    </div>
   </script>
+
   <div id="quizzes_list">
   </div>
 <!-- </div> -->
