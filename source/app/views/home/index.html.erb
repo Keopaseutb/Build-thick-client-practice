@@ -7,10 +7,9 @@
     <h1>{{question}}</h1>
       <ul>
       {{#choices}}
-        <li>{{choice}}</li>
+        <li><a href="/questions/{{../permalink}}#{{choice_id}}">{{choice}}</a></li>
       {{/choices}}
-    </ul>
-  </div>
+    </ul></div>
 </script>
 
 <script id="quiz-template" type="text/x-handlebars-template">

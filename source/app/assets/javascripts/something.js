@@ -1,5 +1,6 @@
 $(document).ready(function(){
   ApplicationController()
+
 });
 
 /*******************************************/
@@ -13,15 +14,23 @@ ApplicationController = function(){
   quiz.fetch()
   var question = new QuizQuestionGetter(1)
   var questionShower = new QuestionShower()
+  var quizAnswerGetter = new QuizAnswerGetter()
   // var choices = new ChoiceShower()
 
   $(quiz).on('quizUpdated', function (e,data) {
     quizShower.draw(data)
   })
 
+    $('.container').on('click','a', function() {
+    debugger
+    var choice_id = this.href.slice(-1)
+    quizAnswerGetter.send(choice_id)
+  })
+
   question.fetch(function(questiondata) {
     questionShower.draw(questiondata.question)
   })
+
 }
 
 QuizListGetter =function(geturl) {
@@ -55,6 +64,27 @@ QuizQuestionGetter.prototype = {
     url: this.questionUrl,  //*When you register this event listener remember to bind
     action: "GET",
     data: {session_key : "ajerjijaf"}
+  }).done(function(returnData){
+    callback(returnData)
+  }).fail(function(){
+    console.log("Error")
+  })
+  }
+}
+
+
+QuizAnswerGetter = function () {
+
+}
+
+QuizAnswerGetter.prototype = {
+  send: function (choice_id) {
+    var self = this;
+    debugger
+     $.ajax({
+    url: '/questions/1/answers.json' ,  //*When you register this event listener remember to bind
+    action: "POST",
+    data: {session_key : "ajerjijaf", choice_id: choice_id }
   }).done(function(returnData){
     callback(returnData)
   }).fail(function(){
