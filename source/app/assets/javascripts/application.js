@@ -11,5 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require handlebars-v1.3.0.js
 //= require jquery_ujs
 //= require_tree .

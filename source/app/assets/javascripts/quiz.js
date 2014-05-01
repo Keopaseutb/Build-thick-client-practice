@@ -9,22 +9,15 @@ function getQuizzes(){
     type: "GET",
   }).done(function(serverdata){
     console.log("Success!", serverdata);
+
+    var source = $("#quiz-template").html();
+    var template = Handlebars.compile(source);
+    var context = {
+      quizName: serverdata.quizzes[0].name
+    };
+    var html = template(context);
+    $(document.body).html(html);
   }).fail(function(serverdata){
     console.log("Error!", serverdata)
   })
 }
-
-
-
-// Returns:
-
-// Success!
-// Object {quizzes: Array[1]}
-// quizzes: Array[1]
-// 0: Object
-// name: "Dev Bootcamp Questions"
-// quiz_id: 1
-// __proto__: Object
-// length: 1
-// __proto__: Array[0]
-// __proto__: Object
