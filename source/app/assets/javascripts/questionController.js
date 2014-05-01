@@ -1,18 +1,18 @@
-function questionController(initOpts) {
-  this.getQuestionsFromDB = initOpts["getQuestionsFromDB"]
+function quizController(initOpts) {
+  this.getQuizzesFromDB = initOpts["getQuizzesFromDB"]
   this.view = initOpts["view"]
 }
 
-questionController.prototype = {
+quizController.prototype = {
   runApp: function(){
-    this.populateViewWithQuestions()
+    this.populateViewWithQuizzes()
   },
 
-  populateViewWithQuestions: function(){
-    this.getQuestionsFromDB.request().done(this.ongetQuestionSuccess.bind(this))
+  populateViewWithQuizzes: function(){
+    this.getQuizzesFromDB.request().done(this.ongetQuizzeSuccess.bind(this))
   },
 
-  ongetQuestionSuccess: function(data){
+  ongetQuizzeSuccess: function(data){
     this.view.draw(data)
   },
 

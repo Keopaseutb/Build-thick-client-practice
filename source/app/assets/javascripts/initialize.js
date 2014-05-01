@@ -5,13 +5,13 @@ $(document).ready(function(){
     addContent: ".container"
   };
 
-  var questionContOpts = {
-    view: new questionView(viewOpts),
-    getQuestionsFromDB: new Client('get', '/quizzes.json')
+  var quizContOpts = {
+    view: new quizView(viewOpts),
+    getQuizzesFromDB: new Client('get', '/quizzes.json')
   };
 
-  var questionListController = new questionController(questionContOpts);
+  var quizListController = new quizController(quizContOpts);
 
-  questionListController.runApp();
+  quizListController.runApp();
 
 });

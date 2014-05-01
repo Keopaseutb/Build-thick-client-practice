@@ -1,10 +1,10 @@
-function questionView(viewOpts) {
+function quizView(viewOpts) {
   this.source = viewOpts['source'];
   this.addContent = viewOpts['addContent'];
 
 }
 
-questionView.prototype = {
+quizView.prototype = {
   draw: function(data){
     var template = Handlebars.compile(this.getSource());
     $(this.addContent).html(template(data));
