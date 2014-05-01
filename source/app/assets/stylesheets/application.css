@@ -12,6 +12,6 @@
  *= require_tree .
  */
 
-#quizz {
+#quiz_wrapper {
 	display: none;
 }
