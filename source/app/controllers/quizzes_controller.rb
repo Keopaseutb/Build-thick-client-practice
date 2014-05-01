@@ -4,6 +4,10 @@ class QuizzesController < ApplicationController
   # GET /quizzes.json
   def index
     quizzes = Quiz.all
-    render json: { quizzes: quizzes }.to_json
+    render json: { quizzes:quizzes  }.to_json
   end
+
+  def show
+  end
+
 end
