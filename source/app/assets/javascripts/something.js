@@ -21,14 +21,20 @@ ApplicationController = function(){
     quizShower.draw(data)
   })
 
-    $('.container').on('click','a', function() {
-    debugger
+  $('.container').on('click','a', function(e) {
+    event.preventDefault()
     var choice_id = this.href.slice(-1)
     quizAnswerGetter.send(choice_id)
   })
 
   question.fetch(function(questiondata) {
     questionShower.draw(questiondata.question)
+  })
+
+  $(quizAnswerGetter).on ('answerSent', function(e,data) {
+      question.fetch(function(questiondata) {
+    questionShower.draw(questiondata.question)
+  })
   })
 
 }
@@ -42,7 +48,7 @@ QuizListGetter.prototype = {
   var self = this
   $.ajax({
     url: this.quizUrl,  //*When you register this event listener remember to bind
-    action: "GET",
+    method: "GET",
     data: {session_key : "ajerjijaf"}
   }).done(function(returnData){
     $(self).trigger('quizUpdated', returnData )
@@ -62,7 +68,7 @@ QuizQuestionGetter.prototype = {
   var self = this;
   $.ajax({
     url: this.questionUrl,  //*When you register this event listener remember to bind
-    action: "GET",
+   method: "GET",
     data: {session_key : "ajerjijaf"}
   }).done(function(returnData){
     callback(returnData)
@@ -73,20 +79,21 @@ QuizQuestionGetter.prototype = {
 }
 
 
-QuizAnswerGetter = function () {
+QuizAnswerGetter = function (event) {
 
 }
 
 QuizAnswerGetter.prototype = {
+
   send: function (choice_id) {
     var self = this;
-    debugger
      $.ajax({
-    url: '/questions/1/answers.json' ,  //*When you register this event listener remember to bind
-    action: "POST",
-    data: {session_key : "ajerjijaf", choice_id: choice_id }
+    url: '/questions/1/answers.json',  //*When you register this event listener remember to bind
+    method: "POST",
+    data: {session_key: "ajerjijaf", choice_id: choice_id }
   }).done(function(returnData){
-    callback(returnData)
+  $(self).trigger('answerSent', returnData )
+   console.log(returnData)
   }).fail(function(){
     console.log("Error")
   })
