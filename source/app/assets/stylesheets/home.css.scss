@@ -1,3 +1,23 @@
-.container {
-  margin: 3em;
+body {
+  background-color: beige;
+  color: black;
+  margin: 35px;
+  font-size: 12px;
+  font-family:Helvetica;
 }
+
+#boxy {
+  background-color: white;
+  margin: 20px;
+  padding: 10px;
+  color:black;
+  margin: 3em;
+  border-radius: 3px;
+  border: 2px solid grey;
+}
+
+.container {}
+
+.a_question {}
+
+.choices {}

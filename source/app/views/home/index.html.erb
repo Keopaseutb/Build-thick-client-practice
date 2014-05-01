@@ -1,12 +1,27 @@
-
+<div id="boxy">
   <div class="container"></div>
-
-
-
+  <hr>
+  <div class="a_question"></div>
+  <div class="choices"></div>
+</div>
 
 <script id="quiz-template" type="text/x-handlebars-template">
   <div id="a_quiz">
-    Quiz Id: {{QuizId}}
+    Quiz Id: {{QuizId}} <br>
     Quiz Title: {{QuizName}}
+  </div>
+</script>
+
+<script id="question-template" type="text/x-handlebars-template">
+
+  <div class="a_question">
+    <ul>
+      <li>Question: {{questionText}}</li>
+      <ol>
+        {{#each choicesArray}}
+            <li>[  ] {{choice}}</li>
+        {{/each}}
+      </ol>
+    </ul>
   </div>
 </script>

@@ -1,39 +1,108 @@
-var handleJSON_quiz = function(data) {
-  console.log(data)
-  console.log("within handleJSON_quiz")
-  var source = $('#quiz-template').html();
-  var template = Handlebars.compile(source);
-  our_data = {
-    QuizId : data['quizzes'][0].quiz_id,
-    QuizName: data['quizzes'][0].name
+
+
+
+// var handleJSON_quiz = function(data) {
+//   console.log(data)
+//   console.log("within handleJSON_quiz")
+//   var source = $('#quiz-template').html();
+//   var template = Handlebars.compile(source);
+//   our_data = {
+//     QuizId : data['quizzes'][0].quiz_id,
+//     QuizName: data['quizzes'][0].name
+//   }
+//   $('.container').append(template(our_data));
+// }
+
+
+// =============================
+// VIEW/TEMPLATE
+// =============================
+function handleJSON() {
+  var proto = this;
+};
+
+handleJSON.prototype = {
+
+  show_quiz: function(data) {
+    var source = $('#quiz-template').html();
+    var template = Handlebars.compile(source);
+    our_data = {
+      QuizId : data['quizzes'][0].quiz_id,
+      QuizName: data['quizzes'][0].name
+    }
+    $('.container').append(template(our_data));
+  },
+  show_question: function(data) {
+    console.log(this)
+    var source = $('#question-template').html();
+    var template = Handlebars.compile(source);
+    our_question = {
+      questionText : data.question.question,
+      choicesArray : data.question.choices
+    }
+    $('.a_question').append(template(our_question));
   }
-  $('.container').append(template(our_data));
+
+  // show_choices: function(data) {
+  //   console.log(data)
+  //   var source = $('#choices-template').html();
+  //   var template = Handlebars.compile(source);
+  //   console.log(data.question.choices[0].choice)
+  //   console.log(data.question.choices)
+  //   our_choices = { choices: [
+  //     {choicetext: data.question.choices}
+  //   ] }
+  //   $('.choices').append(template(our_choices));
+  // }
 }
 
 
-  QuizListFetcher = function(opts) {
-    if (!opts) opts = {};
-    this.queryURL = opts.queryURL || '/quizzes.json'
+// =============================
+// CONTROLLER
+// =============================
+
+// Quiz ---------
+quizFetcher = function(opts) {
+  if (!opts) opts = {};
+  this.queryURL = opts.queryURL || '/quizzes.json'
+}
+
+quizFetcher.prototype = {
+
+  fetch_quiz: function() {
+    $.get(
+      this.queryURL,
+      { session_key: 'a124f87dec55da23' },
+      handleJSON.prototype.show_quiz )
   }
+};
 
-  QuizListFetcher.prototype = {
-    fetch: function() {
-      $.get(
-        this.queryURL,
-        { session_key: 'a124f87dec55da23' },
-        handleJSON_quiz )
-    }
-  };
+// Questions ------
+questionFetcher = function(opts) {
+  if (!opts) opts = {};
+  this.queryURL = opts.queryURL || '/quizzes/1/questions/next.json'
+}
+questionFetcher.prototype = {
+  fetch_question: function() {
+    $.get(
+      this.queryURL,
+      { session_key: 'a124f87dec55da23' },
+      handleJSON.prototype.show_question )
+  }
+}
 
 
 
 
-$(document).ready(function() {
 
-  console.log('it starts!');
+// =============================
+// START!
+// =============================
 
-  new QuizListFetcher().fetch();
-});
+  $(document).ready(function() {
+    new quizFetcher().fetch_quiz();
+    new questionFetcher().fetch_question();
+  });
 
 
 
