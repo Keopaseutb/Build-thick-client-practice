@@ -17,9 +17,8 @@ QuizList.prototype = {
       data: {session_key: "dfakj9987afsjkladsf9"}
     })
     .done(function(json){
-    new CustomEvent('questionList')
-    console.log(json)
-    $.event.trigger('questionList', json)
+      new CustomEvent('questionList')
+      $.event.trigger('questionList', json)
     })
   }
 }

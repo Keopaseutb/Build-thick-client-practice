@@ -7,7 +7,6 @@ QuizzesController.prototype = {
   bindQuizListeners: function(){
     var quiz = this.model
     var quizView = this.view
-
     $(document).on("quizList", quizView.drawQuizzes.bind(quizView))
     $('body').on("click", ".quiz", this.askForQuestions.bind(this))
   },

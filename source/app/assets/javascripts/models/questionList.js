@@ -1,0 +1,6 @@
+function QuestionList(){
+}
+
+QuestionList.prototype = {
+
+}
