@@ -14,14 +14,14 @@
 
 <script id="question-template" type="text/x-handlebars-template">
 
-  <div class="a_question">
     <ul>
-      <li>Question: {{questionText}}</li>
+      <li id={{questionId}}>Question: {{questionText}}</li>
       <ol>
         {{#each choicesArray}}
-            <li>[  ] {{choice}}</li>
+            <li>
+              <button class={{question_id}} id={{choice_id}}>{{choice}}</button>
+            </li>
         {{/each}}
       </ol>
     </ul>
-  </div>
 </script>
